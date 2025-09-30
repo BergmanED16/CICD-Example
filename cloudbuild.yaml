@@ -2,7 +2,7 @@
 
 substitutions:
   # Artifact Registry image path; $PROJECT_ID is substituted automatically.
-  _IMAGE_PATH: "us-central1-docker.pkg.dev/$PROJECT_ID/my-python-app-repo/my-flask-app"
+_IMAGE_NAME: 'us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app'
 
 steps:
 # 1. Build the container image.
