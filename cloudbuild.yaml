@@ -1,17 +1,20 @@
 # Cloud Build configuration for building, pushing, and deploying a Flask app.
 
-substitutions:
-  # Artifact Registry image path; $PROJECT_ID is substituted automatically.
-_IMAGE_NAME: 'us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app'
-
 steps:
 # 1. Build the container image.
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "${_IMAGE_PATH}:latest", "."]
+  args: [
+    "build",
+    "-t", "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest",
+    "."
+  ]
 
 # 2. Push the container image to Artifact Registry.
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "${_IMAGE_PATH}:latest"]
+  args: [
+    "push",
+    "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest"
+  ]
 
 # 3. Deploy the container image to Cloud Run.
 - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -20,14 +23,14 @@ steps:
     - run
     - deploy
     - my-flask-app-service
-    - --image=${_IMAGE_PATH}:latest
+    - --image=us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest
     - --region=us-central1
     - --platform=managed
     - --allow-unauthenticated
 
 # List the images produced by the build.
 images:
-- "${_IMAGE_PATH}:latest"
+- "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest"
 
 # Configure logging to use Cloud Logging only.
 options:
