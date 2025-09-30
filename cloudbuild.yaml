@@ -5,7 +5,7 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   args: [
     "build",
-    "-t", "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest",
+    "-t", "us-central1-docker.pkg.dev/shaped-pride-471520-p5/cicd-example/my-flask-app:latest",
     "."
   ]
 
@@ -13,7 +13,7 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   args: [
     "push",
-    "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest"
+    "us-central1-docker.pkg.dev/shaped-pride-471520-p5/cicd-example/my-flask-app:latest"
   ]
 
 # 3. Deploy the container image to Cloud Run.
@@ -23,14 +23,14 @@ steps:
     - run
     - deploy
     - my-flask-app-service
-    - --image=us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest
+    - --image=us-central1-docker.pkg.dev/shaped-pride-471520-p5/cicd-example/my-flask-app:latest
     - --region=us-central1
     - --platform=managed
     - --allow-unauthenticated
 
 # List the images produced by the build.
 images:
-- "us-central1-docker.pkg.dev/shaped-pride-471520-p5/CICD-Example/my-flask-app:latest"
+- "us-central1-docker.pkg.dev/shaped-pride-471520-p5/cicd-example/my-flask-app:latest"
 
 # Configure logging to use Cloud Logging only.
 options:
